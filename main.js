@@ -46,26 +46,14 @@ function randomWidth() {
 
 
 function createPlant() {
-  let img = document.createElement('img');
   let src = randomUrl();
-  img.setAttribute('src', src);
-  img.style.left = randomWidth();
-  img.style.top = randomHeight();
-  img.classList.add('floating-plant');
-  img.addEventListener('dblclick', (e) => {
-    e.target.parentNode.removeChild(e.target);
-    let array = localStorage.getItem('flowers');
-    array.splice(e.target.dataset.index, 1);
-    localStorage.setItem('flowers', JSON.stringify(array));
-  });
   let plants = JSON.parse(localStorage.getItem('flowers'));
   plants.push({
-    top: img.style.top,
-    left: img.style.left,
+    top: randomHeight(),
+    left: randomWidth(),
     src: src,
     index: plants.length
   });
-  img.dataset.index = plants.length;
   localStorage.setItem('flowers', JSON.stringify(plants));
 }
 
@@ -77,6 +65,9 @@ if (!localStorage.getItem('flowers')) {
 window.onload = function() {
   let images = JSON.parse(localStorage.getItem('flowers'));
   Object.values(images).forEach(value => {
+    if (value === '') {
+      return;
+    }
     let img = document.createElement('img');
     img.setAttribute('src', value.src);
     img.style.left = value.left;
@@ -86,7 +77,7 @@ window.onload = function() {
     img.addEventListener('dblclick', (e) => {
       e.target.parentNode.removeChild(e.target);
       let array = JSON.parse(localStorage.getItem('flowers'));
-      array.splice(e.target.dataset.index, 1);
+      array.splice(e.target.dataset.index, 1, '');
       localStorage.setItem('flowers', JSON.stringify(array));
     });
     document.body.appendChild(img);
