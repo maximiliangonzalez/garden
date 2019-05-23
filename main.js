@@ -17,13 +17,13 @@
 // localStorage.setItem('flowers', JSON.stringify(positions))
 
 const urls = [
-  'https://media2.giphy.com/media/xThta458hXUetKTfvW/source.gif',
-  'https://thumbs.gfycat.com/AntiqueSillyBeardedcollie-size_restricted.gif',
-  'http://66.media.tumblr.com/88dbca5386d8067106151ecefb76bc3d/tumblr_molr2jZhUt1s5jjtzo1_500.gif',
-  'https://i.giphy.com/media/l1J9AS7rcsFgTYH28/giphy.webp',
-  'https://coolguy.website/aesthetic/assets/tulips.gif',
-  'https://gifimage.net/wp-content/uploads/2017/08/transparent-gif-tumblr-26.gif',
-  'https://sitejerk.com/images/gif-or-png-9.gif'
+  'https://media2.giphy.com/media/xThta458hXUetKTfvW/source.gif'//,
+  // 'https://thumbs.gfycat.com/AntiqueSillyBeardedcollie-size_restricted.gif',
+  // 'http://66.media.tumblr.com/88dbca5386d8067106151ecefb76bc3d/tumblr_molr2jZhUt1s5jjtzo1_500.gif',
+  // 'https://i.giphy.com/media/l1J9AS7rcsFgTYH28/giphy.webp',
+  // 'https://coolguy.website/aesthetic/assets/tulips.gif',
+  // 'https://gifimage.net/wp-content/uploads/2017/08/transparent-gif-tumblr-26.gif',
+  // 'https://sitejerk.com/images/gif-or-png-9.gif'
 ];
 
 function randomUrl() {
@@ -43,8 +43,6 @@ function randomWidth() {
   return randomWidth;
 }
 
-
-
 function createPlant() {
   let img = document.createElement('img');
   let src = randomUrl();
@@ -52,11 +50,8 @@ function createPlant() {
   img.style.left = randomWidth();
   img.style.top = randomHeight();
   img.classList.add('floating-plant');
-  img.addEventListener('dblclick', (e) => {
-    e.target.parentNode.removeChild(e.target);
-    let array = localStorage.getItem('flowers');
-    array.splice(e.target.dataset.index, 1);
-    localStorage.setItem('flowers', JSON.stringify(array));
+  img.addEventListener('dblclick', (el) => {
+    el.target.parentNode.removeChild(el.target);
   });
   let plants = JSON.parse(localStorage.getItem('flowers'));
   plants.push({
@@ -86,8 +81,8 @@ window.onload = function() {
     img.addEventListener('dblclick', (e) => {
       e.target.parentNode.removeChild(e.target);
       let array = localStorage.getItem('flowers');
-      array.splice(e.target.dataset.index, 1);
-      localStorage.setItem('flowers', JSON.stringify(array));
+      console.log(e.target);
+      // array.splice(el.target.dataset.index);
     });
     document.body.appendChild(img);
   });
