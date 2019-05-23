@@ -80,9 +80,9 @@ window.onload = function() {
     img.dataset.index = value.index;
     img.addEventListener('dblclick', (e) => {
       e.target.parentNode.removeChild(e.target);
-      let array = localStorage.getItem('flowers');
-      console.log(e.target);
-      // array.splice(el.target.dataset.index);
+      let array = JSON.parse(localStorage.getItem('flowers'));
+      array.splice(e.target.dataset.index, 1);
+      localStorage.setItem('flowers', JSON.stringify(array));
     });
     document.body.appendChild(img);
   });
